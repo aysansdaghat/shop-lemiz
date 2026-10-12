@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Lemiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header class="header-simple">
+    <p>Shop lemiz</p>
+    <nav>
+        <a href="index.html">صفحه اصلی</a>
+        <a href="products.html">محصولات</a>
+        <button id="cart-toggle"><i class="fa-solid fa-cart-shopping"></i> سبد خرید</button>
+    </nav>
+
+    <div class="cart-panel">
+      <button id="cart-close">×</button>
+    <h3>سبد خرید</h3>
+    <ul id="cart-items"></ul>
+    <p id="cart-empty-message">سبد خرید خالیه</p>
+    <button class="whatsapp-order">ثبت سفارش در واتساپ</button>
+</div>
+</header>
+
+<section class="product-detail">
+    <img id="detail-image" src="" alt="محصول">
+    <div class="product-info">
+        <h1 id="detail-name" class="product-name"></h1>
+        <p class="price" id="detail-price"></p>
+        <p class="description" id="detail-description"></p>
+        <button class="add-to-cart">افزودن به سبد</button>
+    </div>
+</section>
+
+<footer>
+        <p>اطلاعات تماس:021000000</p>
+        <p>ادرس فروشگاه: استان تهران-ولیعصر</p>
+        <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

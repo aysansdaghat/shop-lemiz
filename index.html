@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shop lemiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+ <header>
+        <p>Shop lemiz</p>
+        
+    <nav>
+        <a href="index.html">صفحه اصلی</a>
+        <a href="products.html">محصولات</a>
+        <button id="cart-toggle"><i class="fa-solid fa-cart-shopping"></i> سبد خرید</button>
+        <button id="search-toggle"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </nav>
+    <div class="cart-panel">
+        <button id="cart-close">×</button>
+    <h3>سبد خرید</h3>
+    <ul id="cart-items"></ul>
+    <p id="cart-empty-message">سبد خرید خالیه</p>
+    <button class="whatsapp-order">ثبت سفارش در واتساپ</button>
+</div>
+    <input type="text" id="search-input" placeholder="جستجوی محصول...">
+</header>   
+
+
+    <section class="hero">
+        <h1>سبک خودتو پیدا کن </h1>
+        <p>Lemiz مجموعه ای از طرح های خاص </p>
+        <a href="products.html">مشاهده محصولات</a>
+    </section>
+    <section class="products">
+        <h2>پرفروشترین ها</h2>
+        <div class="product-grid">
+     <div class="product-card">
+         <a href="product.html?id=1" class="product-link">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfwUFGve_WTpTUEBZ4anu1FA407HVwD5G-3pekRrFOBA&s=10" alt="محصول 1">
+        <p class="product-name">تیشرت کلاسیک</p>
+        </a>
+        <button class="add-to-cart">افزودن به سبد</button>
+        <div class="quantity-control" style="display: none;">
+        <button class="decrease-qty">-</button>
+        <span class="qty-display">0</span>
+        <button class="increase-qty">+</button>
+    </div>
+     </div>
+     <div class="product-card">
+       <a href="product.html?id=2" class="product-link">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-DcAcJoS61fv5wqm0cPwsDlUJUM0O7EOjzAOxOr4lAQ&s=10" alt="محصول 2">
+        <p  class="product-name">شلوار جین</p>
+        </a>
+        <button class="add-to-cart">افزودن به سبد</button>
+        <div class="quantity-control" style="display: none;">
+    <button class="decrease-qty">-</button>
+    <span class="qty-display">0</span>
+    <button class="increase-qty">+</button>
+</div>
+     </div>
+     <div class="product-card">
+        <a href="product.html?id=3" class="product-link">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLmiNJzR4z6NjD720iVROqrTiwKj_XJd06kH2EQQ1INQ&s=10" alt="محصول 3">
+        <p class="product-name">کاپشن زمستانی</p>
+        </a>
+        <button class="add-to-cart">افزودن به سبد</button>
+        <div class="quantity-control" style="display: none;">
+    <button class="decrease-qty">-</button>
+    <span class="qty-display">0</span>
+    <button class="increase-qty">+</button>
+</div>
+     </div>
+    </div>
+   </section>
+
+   <section class="promo-slider">
+    <h2>پیشنهادهای ویژه</h2>
+    <div class="slider">
+        <button class="prev">‹</button>
+
+         <div class="slide active">
+            <a href="product.html?id=4" class="product-link">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4NNiwuRCvmD0rd3ljLeLtWvI5K3-Ne6GliAx4-QxVRQ&s=10" alt="پیشنهاد ۳">
+            <p class="product-name">کراپ کت مجلسی</p>
+            </a>
+            <button class="add-to-cart">افزودن به سبد</button>
+            <div class="quantity-control" style="display: none;">
+    <button class="decrease-qty">-</button>
+    <span class="qty-display">0</span>
+    <button class="increase-qty">+</button>
+</div>
+        </div>
+        <div class="slide">
+            <a href="product.html?id=5" class="product-link">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzaJ3WYf1FPPhD2e_8jmsqrQJyBMpmZshY3Ju-_83_-A&s=10" alt="پیشنهاد ۱">
+            <p class="product-name">ست کاپلی جذاب</p>
+            </a>
+            <button class="add-to-cart">افزودن به سبد</button>
+            <div class="quantity-control" style="display: none;">
+    <button class="decrease-qty">-</button>
+    <span class="qty-display">0</span>
+    <button class="increase-qty">+</button>
+</div>
+        </div>
+        <div class="slide">
+            <a href="product.html?id=6" class="product-link">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9sRmmEr5Fgo6JCrV2UCGLEBlBYoSDiNVGTJywOPVMdg&s=10" alt="پیشنهاد ۲">
+            <p class="product-name">شلوار جین اورجینال</p>
+            </a>
+            <button class="add-to-cart">افزودن به سبد</button>
+            <div class="quantity-control" style="display: none;">
+    <button class="decrease-qty">-</button>
+    <span class="qty-display">0</span>
+    <button class="increase-qty">+</button>
+</div>
+        </div>
+       
+        <button class="next">›</button>
+    </div>
+</section>
+
+    <footer>
+        <p>اطلاعات تماس:021000000</p>
+        <p>ادرس فروشگاه: استان تهران-ولیعصر</p>
+        <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    </footer>
+
+    <section class="contact">
+        <h2>تماس با ما</h2>
+        <form>
+            <label for="name">نام</label>
+            <input type="text" id="name">
+            
+            <label for="email">ایمیل </label>
+            <input type="email" id="email">
+
+            <label for="note">پیام</label>
+            <textarea id="note"  placeholder="پیام خود را بنویسید..."></textarea>
+
+            <button type="submit">ارسال </button>
+        </form>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
