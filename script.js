@@ -1,3 +1,10 @@
+const SUPABASE_URL = "https://nziclpjevnninrxtgpkm.supabase.co";
+const SUPABASE_KEY = "sb_publishable_S3bt6M2D5zgYz5Ic_1qxyQ__x1E7Kh8";
+const db = (typeof supabase !== "undefined")
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    : null;
+
+
 const slides = document.querySelectorAll('.slide');
 const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
@@ -366,14 +373,45 @@ const products = {
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
 
-if (productId && products[productId]) {
-    const product = products[productId];
+function formatPrice(price) {
+    return Number(price).toLocaleString("de-DE") + " تومان";
+}
 
+function showProductDetail(product) {
     document.querySelector('#detail-image').src = product.image;
     document.querySelector('#detail-name').textContent = product.name;
     document.querySelector('#detail-price').textContent = "قیمت: " + product.price;
     document.querySelector('#detail-description').textContent = product.description;
 }
+
+async function loadProductDetail() {
+    if (!productId || !document.querySelector('#detail-name')) return;
+
+    if (db) {
+        const { data, error } = await db
+            .from("products")
+            .select("*")
+            .eq("id", productId)
+            .single();
+
+        if (data && !error) {
+            showProductDetail({
+                name: data.name,
+                price: formatPrice(data.price),
+                description: data.description,
+                image: data.image_url
+            });
+            return;
+        }
+    }
+
+    // اگه Supabase جواب نداد، از آبجکت قدیمی استفاده می‌کنیم
+    if (products[productId]) {
+        showProductDetail(products[productId]);
+    }
+}
+
+loadProductDetail();
 
 function getPriceByName(productName) {
     for (const id in products) {
@@ -384,5 +422,125 @@ function getPriceByName(productName) {
     return null;
 }
 
+function getIdFromLink(link) {
+    return Number(new URL(link.href, window.location.href).searchParams.get('id'));
+}
+
+async function updateSlidesFromSupabase() {
+    if (!db) return;
+
+    const slideLinks = document.querySelectorAll('.slide .product-link');
+    if (slideLinks.length === 0) return;
+
+    const ids = [];
+    slideLinks.forEach(function(link) {
+        const id = getIdFromLink(link);
+        if (id) ids.push(id);
+    });
+
+    const { data, error } = await db
+        .from("products")
+        .select("id, name, image_url")
+        .in("id", ids);
+
+    if (error || !data) return;
+
+    slideLinks.forEach(function(link) {
+        const product = data.find(function(p) {
+            return p.id === getIdFromLink(link);
+        });
+        if (!product) return;
+
+        link.querySelector('img').src = product.image_url;
+        link.querySelector('.product-name').textContent = product.name;
+    });
+
+    updateAllCardQuantities();
+}
+
+updateSlidesFromSupabase();
 
 
+
+
+
+
+/* =========================================================
+   افزونه‌های ظاهری (فقط اضافه شده؛ منطق بالا دست‌نخورده است)
+   ========================================================= */
+
+// ۱) نمایش قیمت زیر نام محصول در کارت‌ها و اسلایدر (از آبجکت products)
+function parsePrice(priceText) {
+    const digits = String(priceText).replace(/[^\d]/g, '');
+    return digits ? Number(digits) : 0;
+}
+
+document.querySelectorAll('.product-card .product-link, .slide .product-link').forEach(function(link) {
+    const nameElement = link.querySelector('.product-name');
+    if (!nameElement) return;
+    const price = getPriceByName(nameElement.textContent);
+    if (!price) return;
+    const priceElement = document.createElement('p');
+    priceElement.className = 'product-price';
+    priceElement.textContent = price;
+    link.appendChild(priceElement);
+});
+
+// ۲) تعداد کالا روی دکمه سبد خرید + جمع کل داخل پنل
+const cartToggleButton = document.querySelector('#cart-toggle');
+let cartCountBadge = null;
+if (cartToggleButton) {
+    cartCountBadge = document.createElement('span');
+    cartCountBadge.className = 'cart-count';
+    cartCountBadge.hidden = true;
+    cartToggleButton.appendChild(cartCountBadge);
+}
+
+let cartTotalBox = null;
+const orderButton = document.querySelector('.cart-panel .whatsapp-order');
+if (orderButton) {
+    cartTotalBox = document.createElement('div');
+    cartTotalBox.className = 'cart-total';
+    cartTotalBox.hidden = true;
+    cartTotalBox.innerHTML = '<span>جمع کل</span><strong></strong>';
+    orderButton.parentNode.insertBefore(cartTotalBox, orderButton);
+}
+
+function refreshCartExtras() {
+    if (cartCountBadge) {
+        const count = cart.reduce(function(sum, item) { return sum + item.quantity; }, 0);
+        cartCountBadge.textContent = count;
+        cartCountBadge.hidden = count === 0;
+    }
+    if (cartTotalBox) {
+        const total = cart.reduce(function(sum, item) {
+            return sum + parsePrice(getPriceByName(item.name)) * item.quantity;
+        }, 0);
+        cartTotalBox.hidden = cart.length === 0 || total === 0;
+        cartTotalBox.querySelector('strong').textContent = formatPrice(total);
+    }
+}
+
+const originalUpdateCartDisplay = updateCartDisplay;
+updateCartDisplay = function() {
+    originalUpdateCartDisplay();
+    refreshCartExtras();
+};
+refreshCartExtras();
+
+// ۳) بازخورد افزودن به سبد در صفحه جزئیات محصول
+const detailAddButton = document.querySelector('.product-detail .add-to-cart');
+if (detailAddButton) {
+    detailAddButton.addEventListener('click', function() {
+        const oldLabel = 'افزودن به سبد';
+        detailAddButton.textContent = '✓ به سبد اضافه شد';
+        setTimeout(function() { detailAddButton.textContent = oldLabel; }, 1500);
+    });
+}
+
+// ۴) بستن پنل سبد و جستجو با کلید Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key !== 'Escape') return;
+    if (cartPanel) cartPanel.classList.remove('open');
+    if (searchInput) searchInput.classList.remove('open');
+});

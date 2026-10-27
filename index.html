@@ -7,15 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
  <header>
-        <p>Shop lemiz</p>
+        <p class="brand">Shop lemiz</p>
         
     <nav>
-        <a href="index.html">صفحه اصلی</a>
+        <a href="index.html" class="active" aria-current="page">صفحه اصلی</a>
         <a href="products.html">محصولات</a>
         <button id="cart-toggle"><i class="fa-solid fa-cart-shopping"></i> سبد خرید</button>
         <button id="search-toggle"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -81,7 +82,7 @@
    <section class="promo-slider">
     <h2>پیشنهادهای ویژه</h2>
     <div class="slider">
-        <button class="prev">‹</button>
+        <button class="prev" aria-label="قبلی">›</button>
 
          <div class="slide active">
             <a href="product.html?id=4" class="product-link">
@@ -120,19 +121,9 @@
 </div>
         </div>
        
-        <button class="next">›</button>
+        <button class="next" aria-label="بعدی">‹</button>
     </div>
 </section>
-
-    <footer>
-        <p>اطلاعات تماس:021000000</p>
-        <p>ادرس فروشگاه: استان تهران-ولیعصر</p>
-        <div class="social-icons">
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-telegram"></i></a>
-        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-    </footer>
 
     <section class="contact">
         <h2>تماس با ما</h2>
@@ -149,6 +140,19 @@
             <button type="submit">ارسال </button>
         </form>
     </section>
+
+    <footer>
+        <p>اطلاعات تماس:021000000</p>
+        <p>ادرس فروشگاه: استان تهران-ولیعصر</p>
+        <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-telegram"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 
     <script src="script.js"></script>
 </body>
