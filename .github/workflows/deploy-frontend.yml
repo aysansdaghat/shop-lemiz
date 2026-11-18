@@ -1,3 +1,4 @@
+
 name: Deploy Frontend to GitHub Pages
 
 on:
@@ -21,15 +22,27 @@ jobs:
       run:
         working-directory: lemiz-shop
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           cache-dependency-path: lemiz-shop/package-lock.json
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v3
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build React app
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
           path: lemiz-shop/dist
 
@@ -40,5 +53,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
