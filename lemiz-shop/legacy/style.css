@@ -1,0 +1,946 @@
+/* =========================================================
+   Shop Lemiz — Luxury Minimalism
+   پالت: مشکی عمیق / سفید گرم / طلایی ظریف
+   ========================================================= */
+
+:root {
+    --black: #0d0d0d;
+    --black-soft: #1c1c1c;
+    --paper: #faf8f5;
+    --white: #ffffff;
+    --stone: #f0ece5;
+    --line: #e4dfd6;
+    --text: #1a1a1a;
+    --text-muted: #6f6a62;
+    --gold: #b08d57;
+    --gold-deep: #8a6a35;
+    --gold-light: #cdb185;
+
+    --font-fa: 'Vazirmatn', Tahoma, sans-serif;
+    --font-brand: 'Cormorant Garamond', 'Times New Roman', serif;
+
+    --radius: 2px;
+    --container: 1200px;
+    --gutter: clamp(16px, 4vw, 48px);
+    --section-gap: clamp(56px, 9vw, 110px);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--text);
+    font-family: var(--font-fa);
+    font-size: 16px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* =========================================================
+   هدر و ناوبری
+   ========================================================= */
+
+header,
+.header-simple {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    min-height: 72px;
+    padding: 0 var(--gutter);
+    background-color: rgba(250, 248, 245, 0.96);
+    border-bottom: 1px solid var(--line);
+    margin: 0;
+    border-radius: 0;
+}
+
+.brand {
+    margin: 0;
+    font-family: var(--font-brand);
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--black);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.5vw, 32px);
+}
+
+nav a {
+    position: relative;
+    padding: 6px 0;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--black);
+}
+
+nav a:hover::after,
+nav a.active::after {
+    transform: scaleX(1);
+}
+
+#cart-toggle,
+#search-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 4px;
+    background: none;
+    border: none;
+    color: var(--black);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#cart-toggle:hover,
+#search-toggle:hover {
+    color: var(--gold-deep);
+}
+
+#search-toggle {
+    font-size: 17px;
+    min-width: 44px;
+    justify-content: center;
+}
+
+.cart-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background-color: var(--gold);
+    color: var(--black);
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* جستجو: به‌صورت نوار زیر هدر باز می‌شود */
+#search-input {
+    display: none;
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    width: 100%;
+    padding: 18px var(--gutter);
+    background-color: var(--white);
+    border: none;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    font-size: 16px;
+    color: var(--text);
+}
+
+#search-input.open {
+    display: block;
+}
+
+#search-input:focus-visible {
+    outline: none;
+    border-bottom-color: var(--gold);
+}
+
+/* =========================================================
+   دکمه‌ها
+   ========================================================= */
+
+.hero a,
+.contact button,
+.add-to-cart,
+.whatsapp-order {
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* =========================================================
+   بنر اصلی
+   ========================================================= */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 40px;
+    justify-content: center;
+    gap: 18px;
+    min-height: min(78vh, 540px);
+    padding: var(--section-gap) var(--gutter);
+    background-color: rgba(14, 14, 14, 0.938);
+    text-align: center;
+}
+
+.hero h1 {
+    color: var(--white);
+    font-size: clamp(34px, 6.5vw, 68px);
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.hero p {
+    margin: 0;
+    max-width: 34ch;
+    color: #b9b3a8;
+    font-size: clamp(16px, 2vw, 20px);
+}
+
+.hero a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    margin-top: 18px;
+    padding: 0 40px;
+    background-color: var(--gold);
+    color: var(--black);
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.hero a:hover {
+    background-color: transparent;
+    color: var(--gold-light);
+}
+
+/* =========================================================
+   بخش‌ها و عنوان‌ها
+   ========================================================= */
+
+.products,
+.all-products,
+.promo-slider,
+.contact {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--section-gap) var(--gutter) 0;
+}
+
+.products h2,
+.all-products h2,
+.promo-slider h2,
+.contact h2 {
+    margin-bottom: 44px;
+    text-align: center;
+    font-size: clamp(24px, 3.2vw, 32px);
+}
+
+.products h2::after,
+.all-products h2::after,
+.promo-slider h2::after,
+.contact h2::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 1px;
+    margin: 16px auto 0;
+    background-color: var(--gold);
+}
+
+/* =========================================================
+   کارت محصولات
+   ========================================================= */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 40px);
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: center;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.product-card:hover {
+    border-color: var(--gold-light);
+    transform: translateY(-3px);
+}
+
+.product-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.product-card img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    height: auto;
+    object-fit: cover;
+    background-color: var(--stone);
+}
+
+.product-name {
+    margin: 0;
+    padding: 18px 16px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.6;
+}
+
+.product-price {
+    margin: 0;
+    padding: 4px 16px 0;
+    color: var(--gold-deep);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.product-card .add-to-cart,
+.slide .add-to-cart {
+    display: block;
+    width: calc(100% - 32px);
+    min-height: 46px;
+    margin: 16px 16px 0;
+    background-color: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.product-card .add-to-cart:hover,
+.slide .add-to-cart:hover,
+.product-info .add-to-cart:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+}
+
+.product-card > .add-to-cart,
+.product-card > .quantity-control {
+    margin-bottom: 16px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 46px;
+    margin: 16px 16px 0;
+}
+
+.slide .quantity-control {
+    margin-bottom: 0;
+}
+
+.quantity-control button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    color: var(--black);
+    font-size: 18px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.quantity-control button:hover {
+    border-color: var(--gold);
+    background-color: var(--paper);
+}
+
+.qty-display {
+    min-width: 36px;
+    text-align: center;
+    color: var(--black);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* =========================================================
+   اسلایدر پیشنهادهای ویژه
+   ========================================================= */
+
+.slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 3vw, 32px);
+}
+
+.slide {
+    display: none;
+    flex: 0 1 380px;
+    min-width: 0;
+    padding-bottom: 16px;
+    background-color: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-align: center;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background-color: var(--stone);
+    border-radius: 0;
+}
+
+.prev,
+.next {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0 0 4px;
+    background-color: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold-deep);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: var(--gold);
+    color: var(--black);
+}
+
+/* =========================================================
+   صفحه‌ی جزئیات محصول
+   ========================================================= */
+
+.product-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 72px);
+    align-items: start;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: clamp(32px, 6vw, 72px) var(--gutter);
+}
+
+.product-detail img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background-color: var(--stone);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-top: 8px;
+}
+
+.product-info h1 {
+    padding: 0;
+    color: var(--black);
+    font-size: clamp(26px, 3.5vw, 36px);
+}
+
+.product-info .price {
+    margin: 0;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    color: var(--gold-deep);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.product-info .description {
+    margin: 0;
+    max-width: 52ch;
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 2;
+}
+
+.product-info .add-to-cart {
+    align-self: flex-start;
+    min-height: 52px;
+    margin-top: 8px;
+    padding: 0 44px;
+    background-color: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* =========================================================
+   سبد خرید (پنل کناری)
+   ========================================================= */
+
+.cart-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: min(400px, 100vw);
+    height: 100%;
+    padding: 28px 24px 24px;
+    background-color: var(--white);
+    border-right: 1px solid var(--line);
+    box-shadow: 8px 0 32px rgba(0, 0, 0, 0.08);
+}
+
+.cart-panel.open {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-panel h3 {
+    margin: 0 0 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--black);
+    font-size: 20px;
+}
+
+#cart-close {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    color: var(--black);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#cart-close:hover {
+    color: var(--gold-deep);
+}
+
+#cart-items {
+    flex: 0 1 auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-y: auto;
+}
+
+#cart-items li {
+    display: grid;
+    grid-template-columns: 44px 36px 44px 1fr auto;
+    align-items: center;
+    row-gap: 10px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--text);
+}
+
+#cart-items li > span:first-child {
+    grid-column: 1 / -1;
+    color: var(--black);
+    font-weight: 500;
+}
+
+#cart-items li > span:nth-child(3) {
+    text-align: center;
+    font-weight: 700;
+    color: var(--black);
+}
+
+#cart-items li button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 8px;
+    background-color: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--black);
+    font-size: 15px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#cart-items li button:hover {
+    border-color: var(--gold);
+    background-color: var(--paper);
+}
+
+#cart-items li button:last-child {
+    grid-column: 5;
+    border-color: transparent;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+#cart-items li button:last-child:hover {
+    background-color: transparent;
+    color: var(--black);
+    text-decoration: underline;
+}
+
+#cart-empty-message {
+    margin: 32px 0 0;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: auto;
+    padding: 18px 0 4px;
+    border-top: 1px solid var(--line);
+    color: var(--black);
+    font-weight: 500;
+}
+
+.cart-total strong {
+    color: var(--black);
+    font-size: 18px;
+}
+
+.whatsapp-order {
+    display: block;
+    width: 100%;
+    min-height: 52px;
+    margin-top: 12px;
+    padding: 0 16px;
+    background-color: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.cart-total[hidden] + .whatsapp-order {
+    margin-top: auto;
+}
+
+.whatsapp-order:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+}
+
+.whatsapp-order:active {
+    transform: scale(0.99);
+}
+
+/* =========================================================
+   فرم تماس
+   ========================================================= */
+
+.contact {
+    padding-bottom: var(--section-gap);
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 40px);
+    background-color: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--text);
+}
+
+.contact label {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 10px 0;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    color: var(--text);
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.contact textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.contact input:focus,
+.contact textarea:focus {
+    outline: none;
+    border-bottom-color: var(--gold);
+}
+
+.contact button {
+    align-self: center;
+    min-height: 50px;
+    width: 180px;
+    margin-top: 28px;
+    background-color: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+    border-radius: var(--radius);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.contact button:hover {
+    background-color: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+}
+
+/* =========================================================
+   فوتر
+   ========================================================= */
+
+footer {
+    margin: 0;
+    padding: 48px var(--gutter);
+    background-color: var(--black);
+    color: #b9b3a8;
+    text-align: center;
+    border-radius: 0;
+}
+
+footer p {
+    margin: 0 0 6px;
+    color: #b9b3a8;
+    font-size: 15px;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--white);
+    font-size: 22px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.social-icons a:hover {
+    color: var(--gold);
+}
+
+/* =========================================================
+   واکنش‌گرایی
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    header,
+    .header-simple {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 4px 12px;
+        min-height: 64px;
+        padding-block: 8px;
+    }
+
+    .brand {
+        font-size: 26px;
+    }
+
+    nav {
+        gap: 12px;
+    }
+
+    nav a,
+    #cart-toggle {
+        font-size: 14px;
+    }
+
+    .product-detail {
+        grid-template-columns: 1fr;
+    }
+
+    .product-info .add-to-cart {
+        align-self: stretch;
+    }
+
+    .slider {
+        gap: 8px;
+    }
+
+    .prev,
+    .next {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        gap: 12px;
+    }
+
+    .product-name {
+        padding: 12px 8px 0;
+        font-size: 14px;
+    }
+
+    .product-price {
+        padding: 2px 8px 0;
+        font-size: 13px;
+    }
+
+    .product-card .add-to-cart,
+    .slide .add-to-cart {
+        width: calc(100% - 16px);
+        margin: 12px 8px 0;
+        font-size: 14px;
+    }
+
+    .quantity-control {
+        margin: 12px 8px 0;
+        gap: 2px;
+    }
+
+    .product-card > .add-to-cart,
+    .product-card > .quantity-control {
+        margin-bottom: 8px;
+    }
+
+    .hero a {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}

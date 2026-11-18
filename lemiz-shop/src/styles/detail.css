@@ -1,0 +1,135 @@
+/* ---------- صفحه جزئیات محصول ---------- */
+.pdp {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: start;
+}
+
+.pdp__media {
+  position: relative;
+  border-radius: var(--r-tile);
+  background: var(--lilac);
+  overflow: hidden;
+}
+
+.pdp__media > img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--lilac);
+}
+
+.pdp__media .product-card__badges {
+  top: 16px;
+  inset-inline-start: 16px;
+}
+
+.pdp__info {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  align-content: start;
+}
+
+.pdp__category {
+  color: var(--cobalt);
+  font-weight: 700;
+  font-size: var(--step--1);
+}
+
+.pdp__name {
+  font-size: var(--step-4);
+  line-height: 1.2;
+}
+
+.pdp__price {
+  margin-top: 0;
+}
+
+.pdp__saving {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+  font-variant-numeric: tabular-nums;
+}
+
+.pdp__desc {
+  max-width: 52ch;
+  color: var(--ink);
+  line-height: 2.05;
+}
+
+.pdp__status {
+  min-height: 1.6em;
+  font-size: var(--step--1);
+}
+
+.pdp__stock {
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.pdp__stock.is-low {
+  color: var(--cobalt);
+}
+
+.pdp__stock.is-out {
+  color: var(--ink);
+}
+
+.pdp__actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.pdp__actions .btn {
+  flex: 1;
+}
+
+.pdp__actions .wish-btn {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid var(--ink);
+  flex-shrink: 0;
+}
+
+.pdp__actions .wish-btn[aria-pressed='true'] {
+  border-color: var(--cobalt);
+}
+
+.pdp__assurances {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.pdp__assurances li {
+  position: relative;
+  padding-inline-start: 20px;
+}
+
+.pdp__assurances li::before {
+  content: '✓';
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--cobalt);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .pdp {
+    grid-template-columns: 1fr;
+  }
+
+  .pdp__media {
+    max-width: 460px;
+  }
+}

@@ -1,0 +1,35 @@
+/* پالت Cobalt & Bone: Bone زمینه، Ink Blue متن، Cobalt کنش، Lilac Mist سطح دوم، Stone فقط برای خط و عنصر تزئینی */
+:root {
+  --bone: #f5f2ec;
+  --bone-deep: #ebe6dc;
+  --ink: #1b2340;
+  --ink-soft: #565c78; /* متن ثانویه روی Bone و Lilac، کنتراست بالای ۴٫۵ */
+  --cobalt: #3a56d4;
+  --cobalt-deep: #2b43b0;
+  --lilac: #dad8f2;
+  --stone: #8a8c96;
+  --line: rgba(27, 35, 64, 0.16);
+
+  --font-body: 'Vazirmatn', Tahoma, 'Segoe UI', sans-serif;
+  --font-display: 'Lalezar', 'Vazirmatn', Tahoma, sans-serif;
+  --font-latin: 'Bricolage Grotesque', 'Vazirmatn', Arial, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: clamp(1.1rem, 1.04rem + 0.3vw, 1.3rem);
+  --step-2: clamp(1.4rem, 1.2rem + 1vw, 1.9rem);
+  --step-3: clamp(1.9rem, 1.5rem + 2vw, 2.9rem);
+  --step-4: clamp(2.4rem, 1.7rem + 3.4vw, 4.2rem);
+  --step-5: clamp(3rem, 1.9rem + 5.6vw, 6rem);
+
+  --r-ctl: 10px;
+  --r-img: 6px;
+  --r-tile: 18px;
+
+  --gutter: clamp(18px, 4.5vw, 64px);
+  --maxw: 1360px;
+  --header-h: 72px;
+  --section-gap: clamp(64px, 9vw, 120px);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

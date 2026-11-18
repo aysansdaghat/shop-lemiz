@@ -1,0 +1,723 @@
+/* ---------- هیرو: ریل برچسب‌های آویزان ---------- */
+.hero {
+  background: #1b2340;
+  color: var(--bone);
+  overflow: hidden;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: center;
+  min-height: min(48svh, 420px);
+  padding-block: clamp(14px, 2.4vw, 30px);
+}
+
+.hero h1 {
+  font-size: var(--step-4);
+  line-height: 1.15;
+  color: var(--bone);
+}
+
+.hero__lead {
+  max-width: 40ch;
+  margin-top: 14px;
+  font-size: var(--step-1);
+  line-height: 2;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.rail {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-self: start;
+  margin-top: clamp(0px, 2vw, 14px);
+  border-top: 2px solid color-mix(in srgb, var(--bone) 55%, transparent);
+}
+
+.tag-wrap {
+  --drop: calc(14px + var(--d) * 22px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--drop);
+  transform-origin: 50% 0;
+  animation: swing 1.9s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 0.14s);
+}
+
+/* نخ برچسب */
+.tag-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1.5px;
+  height: calc(var(--drop) + 4px);
+  background: var(--bone);
+  transform: translateX(-50%);
+}
+
+.tag {
+  position: relative;
+  display: block;
+  width: clamp(110px, 11vw, 150px);
+  padding: 22px 8px 10px;
+  border-radius: var(--r-ctl);
+  background: var(--bone);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 0 22px 30px -18px rgba(10, 16, 48, 0.6);
+  transition: transform 0.35s var(--ease-out);
+}
+
+/* سوراخ برچسب */
+.tag::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+  transform: translateX(-50%);
+}
+
+.tag:hover {
+  transform: translateY(-4px);
+}
+
+.tag img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-img);
+  background: var(--lilac);
+}
+
+.tag__name {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.tag__price {
+  display: block;
+  color: var(--cobalt);
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(-9deg);
+  }
+  22% {
+    transform: rotate(6deg);
+  }
+  44% {
+    transform: rotate(-3.5deg);
+  }
+  66% {
+    transform: rotate(1.8deg);
+  }
+  84% {
+    transform: rotate(-0.6deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .rail {
+    margin-top: 8px;
+  }
+
+  .tag-wrap:nth-child(n + 4) {
+    display: none;
+  }
+
+  .rail {
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 560px) {
+  .tag-wrap:nth-child(n + 3) {
+    display: none;
+  }
+
+  .tag {
+    width: min(42vw, 180px);
+  }
+}
+
+/* ---------- دسته‌بندی‌ها ---------- */
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  grid-auto-rows: minmax(250px, auto);
+  gap: 12px;
+}
+
+.cat-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2px;
+  min-height: 250px;
+  padding: clamp(20px, 2.4vw, 32px);
+  border-radius: var(--r-tile);
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+}
+
+.cat-tile--lead {
+  grid-row: span 2;
+}
+
+.cat-tile--ink {
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.cat-tile--lilac {
+  background: var(--lilac);
+  color: var(--ink);
+}
+
+.cat-tile--bone {
+  background: var(--bone-deep);
+  color: var(--ink);
+}
+
+.cat-tile__img {
+  position: absolute;
+  top: 22px;
+  inset-inline-end: 22px;
+  z-index: -1;
+  width: clamp(110px, 38%, 210px);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-img);
+  background: var(--lilac);
+  transform: rotate(3deg);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.cat-tile--lead .cat-tile__img {
+  width: clamp(150px, 46%, 260px);
+}
+
+.cat-tile:hover .cat-tile__img {
+  transform: rotate(0) scale(1.03);
+}
+
+.cat-tile__name {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1.3;
+}
+
+.cat-tile--lead .cat-tile__name {
+  font-size: var(--step-4);
+}
+
+.cat-tile__count {
+  font-size: var(--step--1);
+  opacity: 0.8;
+}
+
+@media (max-width: 800px) {
+  .cat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cat-tile--lead {
+    grid-column: span 2;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .cat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cat-tile--lead {
+    grid-column: auto;
+  }
+}
+
+/* ---------- محصولات: شبکه و قفسه‌ی افقی ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 32px) clamp(14px, 2vw, 28px);
+}
+
+@media (max-width: 1100px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.shelf {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(220px, 24vw, 300px);
+  gap: 20px;
+  overflow-x: auto;
+  padding: 4px var(--gutter) 20px;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: thin;
+}
+
+.shelf__item {
+  scroll-snap-align: start;
+}
+
+/* ---------- پیشنهاد ویژه ---------- */
+.offers {
+  background: var(--lilac);
+}
+
+.offer {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+}
+
+.offer--animate {
+  animation: offer-in 0.55s var(--ease-out);
+}
+
+@keyframes offer-in {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+}
+
+.offer__media {
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 3vw, 36px);
+  border-radius: var(--r-tile);
+  background: var(--bone);
+}
+
+.offer__media img {
+  width: min(100%, 340px);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-img);
+  background: var(--lilac);
+}
+
+.offer__info {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+
+.offer__discount {
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--cobalt);
+  color: var(--bone);
+  font-size: var(--step--1);
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.offer__name {
+  font-size: var(--step-4);
+  line-height: 1.25;
+}
+
+.offer__desc {
+  max-width: 48ch;
+  color: var(--ink);
+  line-height: 2;
+}
+
+.offer__saving {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.offer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  max-width: 460px;
+  margin-top: 8px;
+}
+
+.offer__actions > :first-child {
+  flex: 1 1 200px;
+}
+
+.offers__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: clamp(24px, 4vw, 44px);
+}
+
+.offers__dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.offers__dot {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.offers__dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    background-color 0.2s,
+    width 0.35s var(--ease-out);
+}
+
+.offers__dot[aria-current='true']::after {
+  width: 24px;
+  border-radius: 6px;
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+}
+
+.offers .icon-btn--ring:hover {
+  background: var(--bone);
+}
+
+@media (max-width: 800px) {
+  .offer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- بنرها ---------- */
+.banners {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+
+.banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 340px;
+  padding: clamp(24px, 3.5vw, 44px);
+  border-radius: var(--r-tile);
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+}
+
+.banner--cobalt {
+  background: var(--cobalt);
+  color: var(--bone);
+}
+
+.banner--ink {
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.banner__copy {
+  display: grid;
+  gap: 10px;
+  max-width: 24ch;
+}
+
+.banner__title {
+  font-size: var(--step-3);
+  line-height: 1.35;
+}
+
+.banner__cta {
+  align-self: flex-start;
+  padding-bottom: 2px;
+  border-bottom: 2px solid currentColor;
+  font-weight: 700;
+}
+
+.banner__img {
+  position: absolute;
+  bottom: 22px;
+  inset-inline-end: 22px;
+  z-index: -1;
+  width: clamp(120px, 30%, 190px);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-img);
+  background: var(--lilac);
+  transform: rotate(-4deg);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.banner:hover .banner__img {
+  transform: rotate(0) scale(1.03);
+}
+
+@media (max-width: 800px) {
+  .banners {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- معرفی برند ---------- */
+.brand-section {
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.brand-section__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: start;
+}
+
+.brand-section h2 {
+  font-size: var(--step-4);
+  line-height: 1.25;
+}
+
+.brand-section__intro p {
+  max-width: 44ch;
+  margin-top: 20px;
+  color: color-mix(in srgb, var(--bone) 82%, var(--ink));
+  font-size: var(--step-1);
+  line-height: 2.05;
+}
+
+.advantages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 32px;
+  margin: 0;
+}
+
+.advantage {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding-block: 24px;
+  border-top: 1px solid color-mix(in srgb, var(--bone) 24%, transparent);
+}
+
+.advantage svg {
+  color: var(--lilac);
+}
+
+.advantage dt {
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: var(--step-1);
+}
+
+.advantage dd {
+  margin: 0;
+  color: color-mix(in srgb, var(--bone) 82%, var(--ink));
+  font-size: var(--step--1);
+  line-height: 1.95;
+}
+
+@media (max-width: 860px) {
+  .brand-section__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .advantages {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- نظرها ---------- */
+.reviews {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.reviews__side {
+  display: grid;
+  gap: 0;
+}
+
+.review {
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.review blockquote {
+  margin: 0 0 14px;
+}
+
+.review p {
+  line-height: 2.05;
+}
+
+.review figcaption {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.review figcaption a {
+  color: var(--ink);
+  text-underline-offset: 5px;
+}
+
+.review figcaption strong {
+  color: var(--ink);
+}
+
+.review--lead {
+  padding-top: 28px;
+  border-top: 2px solid var(--ink);
+}
+
+.review--lead p {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1.6;
+}
+
+.reviews__side .review + .review {
+  margin-top: 28px;
+}
+
+@media (max-width: 800px) {
+  .reviews {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- خبرنامه ---------- */
+.newsletter {
+  padding-block: clamp(56px, 8vw, 96px);
+  background: var(--cobalt);
+  color: var(--bone);
+}
+
+.newsletter__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: center;
+}
+
+.newsletter h2 {
+  font-size: var(--step-3);
+}
+
+.newsletter__grid > div p {
+  margin-top: 10px;
+  max-width: 42ch;
+}
+
+.newsletter__form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+
+.newsletter__row {
+  display: flex;
+  gap: 12px;
+}
+
+.newsletter__row input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 4px;
+  border: 0;
+  border-bottom: 2px solid var(--bone);
+  border-radius: 0;
+  background: transparent;
+  color: var(--bone);
+}
+
+.newsletter__row input::placeholder {
+  color: color-mix(in srgb, var(--bone) 72%, var(--cobalt));
+}
+
+.newsletter__msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 2em;
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: var(--step--1);
+}
+
+.newsletter__note {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 800px) {
+  .newsletter__grid {
+    grid-template-columns: 1fr;
+  }
+}

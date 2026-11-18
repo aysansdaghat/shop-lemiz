@@ -1,0 +1,11 @@
+# Django 5.0.x با mssql-django 1.5 سازگار است (mssql-django要求 django<5.1)
+Django==5.0.14
+djangorestframework==3.15.0
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.6.0
+django-filter==24.3
+drf-spectacular==0.27.2
+python-dotenv==1.0.1
+# درایور SQL Server (فقط برای اتصال به SQL Server لازم است)
+mssql-django==1.5
+pyodbc==5.2.0

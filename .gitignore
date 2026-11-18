@@ -1,0 +1,20 @@
+﻿# Python / Django
+backend/.venv/
+**/__pycache__/
+*.py[cod]
+*.sqlite3
+backend/media/
+backend/staticfiles/
+
+# Environment variables - never upload secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Node / Vite
+**/node_modules/
+lemiz-shop/dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db

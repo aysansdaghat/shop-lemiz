@@ -1,0 +1,170 @@
+/* ---------- ساختار مشترک صفحات داخلی ---------- */
+.page {
+  padding-block: clamp(28px, 5vw, 56px) var(--section-gap);
+}
+
+.breadcrumbs {
+  margin-bottom: 20px;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumbs li + li::before {
+  content: '›';
+  margin-inline-end: 6px;
+  color: var(--stone);
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--cobalt);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.breadcrumbs [aria-current='page'] {
+  color: var(--ink);
+}
+
+.page-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+.page-head h1 {
+  font-size: var(--step-4);
+  line-height: 1.2;
+}
+
+/* ---------- نوار ابزار فروشگاه ---------- */
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: clamp(20px, 3vw, 32px);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-chip {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: var(--step--1);
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+
+.filter-chip:hover {
+  background: var(--lilac);
+}
+
+.filter-chip[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--bone);
+  border-color: var(--ink);
+}
+
+.sort-field select {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--r-ctl);
+  background: var(--bone);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: var(--step--1);
+  cursor: pointer;
+}
+
+.shop-query {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--cobalt);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  cursor: pointer;
+}
+
+/* ---------- حالت خالی ---------- */
+.empty-state {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  align-content: center;
+  min-height: 46vh;
+  padding-block: clamp(32px, 6vw, 64px);
+  text-align: start;
+}
+
+.empty-state h1,
+.empty-state h2 {
+  font-size: var(--step-3);
+}
+
+.empty-state p {
+  max-width: 46ch;
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+}
+
+/* ---------- صفحه دسته‌بندی‌ها ---------- */
+.cat-grid--page {
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+
+.page-cta {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+@media (max-width: 560px) {
+  .sort-field {
+    width: 100%;
+  }
+
+  .sort-field select {
+    width: 100%;
+  }
+}

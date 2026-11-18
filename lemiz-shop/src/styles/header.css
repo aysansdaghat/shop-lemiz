@@ -1,0 +1,215 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: color-mix(in srgb, var(--bone) 94%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: var(--header-h);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-latin);
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+/* حلقه‌ی کوچک مثل سوراخ برچسب لباس؛ همان نشانه‌ی هنگ‌تگ‌های صفحه‌ی اصلی */
+.brand__hole {
+  width: 15px;
+  height: 15px;
+  border: 3.5px solid var(--cobalt);
+  border-radius: 50%;
+}
+
+.nav-desktop {
+  display: flex;
+  gap: clamp(18px, 2.6vw, 38px);
+  margin-inline: auto;
+}
+
+.nav-link {
+  position: relative;
+  padding: 8px 2px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 2px;
+  height: 2px;
+  background: var(--cobalt);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-link.active {
+  color: var(--cobalt);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.menu-btn {
+  display: none;
+}
+
+/* پنل جستجو و منوی موبایل از زیر هدر باز می‌شوند */
+.search-panel,
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  background: var(--bone);
+  border-bottom: 1px solid var(--line);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path 0.45s var(--ease-out),
+    visibility 0s 0.45s;
+}
+
+.search-panel[data-open='true'],
+.mobile-menu[data-open='true'] {
+  clip-path: inset(0 0 -40px 0);
+  visibility: visible;
+  transition: clip-path 0.45s var(--ease-out);
+}
+
+.search-panel {
+  padding-bottom: 12px;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--ink);
+  transition: border-color 0.2s;
+}
+
+.search-field:focus-within {
+  border-color: var(--cobalt);
+}
+
+.search-field input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--step-1);
+  outline: none;
+}
+
+.search-field input::placeholder {
+  color: var(--ink-soft);
+}
+
+.search-status {
+  min-height: 1.9em;
+  padding-top: 8px;
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.search-results a {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.search-results a:hover .search-results__name {
+  color: var(--cobalt);
+}
+
+.search-results img {
+  width: 56px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: var(--r-img);
+  background: var(--lilac);
+}
+
+.search-results__name {
+  font-weight: 700;
+}
+
+.search-results__price {
+  color: var(--ink-soft);
+  font-size: var(--step--1);
+}
+
+.mobile-menu {
+  padding-bottom: 20px;
+}
+
+.mobile-menu__link {
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.mobile-menu__link.active {
+  color: var(--cobalt);
+}
+
+@media (max-width: 899px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .menu-btn {
+    display: grid;
+  }
+
+  .site-header__bar {
+    gap: 12px;
+  }
+
+  .brand {
+    margin-inline-end: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .mobile-menu {
+    display: none;
+  }
+}
